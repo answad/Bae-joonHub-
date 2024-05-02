@@ -1,17 +1,16 @@
-import java.util.*
-
+import java.util.Arrays
+import java.util.Scanner
 
 fun main(args: Array<String>) {
     val sc = Scanner(System.`in`)
     val N = sc.nextInt()
     val A = IntArray(N)
     val B = IntArray(N)
-    for (i in 0 until N) {
-        A[i] = sc.nextInt()
-    }
-    for (i in 0 until N) {
-        B[i] = sc.nextInt()
-    }
+
+    A.forEachIndexed { index, _ -> A[index] = sc.nextInt() }
+
+    B.forEachIndexed { index, _ -> B[index] = sc.nextInt() }
+
     Arrays.sort(A)
     Arrays.sort(B)
     var S = 0
