@@ -1,55 +1,44 @@
 #include <stdio.h>
 #include <string.h>
 
-// 사전 순으로 정렬하는 함수
-void sortStrings(char arr[][51], int n) {
-    char temp[51];
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (strcmp(arr[i], arr[j]) > 0) {
-                strcpy(temp, arr[i]);
-                strcpy(arr[i], arr[j]);
-                strcpy(arr[j], temp);
+//mindway homework
+
+void organize(char str[][51], int compare);
+
+int main(void) {
+    int n;
+    scanf("%d", &n); //입력횟수를 받는 코드
+    char book_name[1000][51];
+    int counting[1000] = { 0 }; 
+    for (int i = 0; i < n; i++) {
+        scanf("%s", book_name[i]); 
+    }
+    organize(book_name, n);
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j <= n; j++) {
+            if (strcmp(book_name[i], book_name[j]) == 0) { 
+                counting[i]++;
             }
         }
     }
-}
-
-int main() {
-    int n;
-
-    // 책 권 수 입력받기
-    scanf("%d", &n);
-
-    // 책 제목 입력 받기
-    char best[n][51];
-    int cnt[n];
-
-    for (int i = 0; i < n; i++) {
-        scanf("%s", best[i]);
-        cnt[i] = 1; 
-    }
-
-    // 책 제목을 사전순으로 정렬
-    sortStrings(best, n);
-
-    // 제일 많이 나온 책 찾기
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (strcmp(best[i], best[j]) == 0)
-                cnt[i]++;
+    int max = 0;
+    for (int i = 1; i < n; i++) {
+        if (counting[i] > counting[max]) {
+            max = i;
         }
     }
-
-    // 제일 많이 팔린 책의 인덱스 번호 변수에 넣기
-    int maxIndex = 0;
-    for (int i = 1; i < n; i++) {
-        if (cnt[i] > cnt[maxIndex])
-            maxIndex = i;
-    }
-
-    // 제일 많이 팔린 책 출력
-    printf("%s\n", best[maxIndex]);
-
+    printf("%s\n", book_name[max]);
     return 0;
+}
+void organize(char str[][51], int compare) {
+    char temp[51];
+    for (int i = 0; i < compare; i++) {
+        for (int j = i+1; j < compare; j++) {
+            if (strcmp(str[i], str[j]) > 0) {
+                strcpy(temp, str[i]);
+                strcpy(str[i], str[j]);
+                strcpy(str[j], temp);
+            }
+        }
+    }
 }
