@@ -1,34 +1,25 @@
-
 fun main() {
-    val repeat = readlnOrNull() ?: return
-    repeat(repeat.toInt()) {
-        val input = readlnOrNull() ?: return
-        val list = input.toMutableList()
-
-        while (true) {
-            if (list.size % 2 == 1) {
-                println("NO")
-                break
-            } else if (list.isEmpty()) {
-                println("YES")
-                break
-            }
-
+    repeat(readln().toInt()) {
+        val list = readln().toMutableList()
+        
+        while (list.isNotEmpty()) {
             var found = false
-            list.forEachIndexed { index, it ->
-                if (index < list.size - 1 && it == '(' && list[index + 1] == ')') {
-                    list[index] = ' '
-                    list[index + 1] = ' '
+            for (i in 0 until list.size - 1) {
+                if (list[i] == '(' && list[i + 1] == ')') {
+                    list.subList(i, i + 2).clear()
                     found = true
+                    break
                 }
             }
-
-            list.removeIf { it == ' ' }
 
             if (!found) {
                 println("NO")
                 break
             }
+        }
+        
+        if (list.isEmpty()) {
+            println("YES")
         }
     }
 }
