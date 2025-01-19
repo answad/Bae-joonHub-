@@ -3,8 +3,8 @@ fun main() {
     print(
         if (times == 0) 0
         else generateSequence(0L to 1L) { it.second to it.first + it.second }
-            .take(times + 1)
+            .take(times)
             .last()
-            .first
+            .second
     )
 }
